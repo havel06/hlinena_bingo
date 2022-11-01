@@ -1,8 +1,15 @@
-var today = new Date();
-var date_text = String(today.getDate()) + ". " + String(today.getMonth() + 1) + ". " + String(today.getFullYear());
-document.getElementById("date").innerText = date_text;
+let today = new Date();
+let date_text =
+	String(today.getDate()) +
+	". " +
+	String(today.getMonth() + 1) +
+	". " +
+	String(today.getFullYear());
 
-var dict = [
+document.getElementById("date").innerText = date_text;
+let squares = document.getElementsByClassName("square");
+
+let dict = [
 	"drevorubač",
 	"hnusné číslo",
 	"zneužít",
@@ -26,10 +33,10 @@ var dict = [
 	"scheatovat",
 	"nekonečná minuta",
 	"chuck norris",
-]
+];
 
 //shuffle
-var random_gen = new Math.seedrandom(date_text);
+let random_gen = new Math.seedrandom(date_text);
 
 for (i = 0; i < dict.length; ++i)
 {
@@ -39,70 +46,63 @@ for (i = 0; i < dict.length; ++i)
 	dict[i] = temp;
 }
 
-function win()
-{
+const win = () => {
 	alert("Bingo!");
-}
+};
 
-var checked = Array(16).fill(false);
-function check_win()
-{
+let checked = Array(16).fill(false);
+
+const check_win = () => {
 	//columns
-	for (x = 0; x < 4; ++x)
-	{
+	for (x = 0; x < 4; ++x) {
 		column_full = true;
-		for (y = 0; y < 4; ++y)
-		{
-			if (!checked[y * 4 + x])	
-			{
+		for (y = 0; y < 4; ++y) {
+			if (!checked[y * 4 + x]) {
 				column_full = false;
 			}
 		}
-		if (column_full)
-		{
+		if (column_full) {
 			win();
 			return;
 		}
 	}
 	//rows
-	for (y = 0; y < 4; ++y)
-	{
+	for (y = 0; y < 4; ++y) {
 		row_full = true;
-		for (x = 0; x < 4; ++x)
-		{
-			if (!checked[y * 4 + x])	
-			{
+		for (x = 0; x < 4; ++x) {
+			if (!checked[y * 4 + x]) {
 				row_full = false;
 			}
 		}
-		if (row_full)
-		{
+		if (row_full) {
 			win();
 			return;
 		}
 	}
+
 	//diagonal
-	if (checked[0] && checked[5] && checked[10] && checked[15])
-	{
+	if (checked[0] && checked[5] && checked[10] && checked[15]) {
 		win();
 		return;
 	}
-	if (checked[3] && checked[6] && checked[9] && checked[12])
-	{
+	if (checked[3] && checked[6] && checked[9] && checked[12]) {
 		win();
 		return;
 	}
-}
+};
 
-var squares = document.getElementsByClassName("square")
-
-for (square_index = 0; square_index < squares.length; square_index++)
-{
-	squares[square_index].children[0].innerText = dict[square_index];
-	let ind = square_index; //js sucks
-	squares[square_index].onclick = function(){
-		checked[ind] = true;
+const onClickCell = (cell, index) => {
+	cell.onclick = function () {
+		checked[index] = true;
 		this.style.opacity = 0.4;
 		check_win();
-	}
-}
+	};
+};
+
+squares = [...squares];
+
+squares.forEach((cell) => {
+	let index = squares.indexOf(cell);
+	cell.children[0].innerText = dict[index];
+	onClickCell(cell, index);
+});
