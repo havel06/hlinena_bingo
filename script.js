@@ -1,5 +1,10 @@
-var today = new Date();
-var date_text = String(today.getDate()) + ". " + String(today.getMonth() + 1) + ". " + String(today.getFullYear());
+let today = new Date();
+let date_text =
+	String(today.getDate()) +
+	". " +
+	String(today.getMonth() + 1) +
+	". " +
+	String(today.getFullYear());
 
 document.getElementById("date").innerText = date_text;
 let squares = document.getElementsByClassName("square");
@@ -42,30 +47,38 @@ dict.map((cell) => {
 
 const win = () => {
 	alert("Bingo!");
-}
-
-const full = (bool) => {
-	for (x = 0; x < 4; ++x) {
-		bool = true;
-		for (y = 0; y < 4; ++y) {
-			if (!checked[y * 4 + x]) {
-				bool = false;
-			}
-		}
-		if (bool) {
-			win();
-			return;
-		}
-	}
 };
 
 let checked = Array(16).fill(false);
 
 const check_win = () => {
 	//columns
-	full(true);
+	for (x = 0; x < 4; ++x) {
+		column_full = true;
+		for (y = 0; y < 4; ++y) {
+			if (!checked[y * 4 + x]) {
+				column_full = false;
+			}
+		}
+		if (column_full) {
+			win();
+			return;
+		}
+	}
 	//rows
-	full(false);
+	for (y = 0; y < 4; ++y) {
+		row_full = true;
+		for (x = 0; x < 4; ++x) {
+			if (!checked[y * 4 + x]) {
+				row_full = false;
+			}
+		}
+		if (row_full) {
+			win();
+			return;
+		}
+	}
+
 	//diagonal
 	if (checked[0] && checked[5] && checked[10] && checked[15]) {
 		win();
@@ -75,7 +88,7 @@ const check_win = () => {
 		win();
 		return;
 	}
-}
+};
 
 const onClickCell = (cell, index) => {
 	cell.onclick = function () {
@@ -85,7 +98,7 @@ const onClickCell = (cell, index) => {
 	};
 };
 
-squares = [ ...squares ];
+squares = [...squares];
 
 squares.forEach((cell) => {
 	let index = squares.indexOf(cell);
