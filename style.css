@@ -5,6 +5,7 @@ body
 
 header
 {
+	box-sizing: border-box;
 	text-align: center;
 	color: yellow;
 	background-image: url("bg-nedk.jpg");
