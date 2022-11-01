@@ -11,6 +11,7 @@ header
 	border-radius: 1em;
 	padding: 0.5em;
 	margin-bottom: 1em;
+	width: 100%;
 }
 
 header>*>*
@@ -22,10 +23,12 @@ header>*>*
 main
 {
 	text-align: center;
+	width: 100%;
 }
 
 .board
 {
+	max-width: 100%;
 	display: inline-grid;
 	grid-template-columns: 25% 25% 25% 25%;
 	grid-template-rows: 25% 25% 25% 25%;
@@ -33,8 +36,10 @@ main
 
 .square
 {
-	width: 6em;
-	height: 6em;
+	max-width: 6.5em;
+	width: calc(100% - 4px);
+	height: 0;
+	padding-bottom: 100%; /* square aspect ratio */
 	color: white;
 	background-image: url("bg-dark.jpg");
 	margin: 2px;
@@ -45,6 +50,6 @@ main
 {
 	display: inline-block;
 	position: relative;
-	top: 50%;
+	margin-top: 50%;
 	translate: 0 -50%;
 }
