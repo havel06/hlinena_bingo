@@ -33,6 +33,7 @@ let dict = [
 	"scheatovat",
 	"nekonečná minuta",
 	"chuck norris",
+	"nepriatel",
 ];
 
 //shuffle
