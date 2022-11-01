@@ -25,6 +25,7 @@ var dict = [
 	"veronika",
 	"scheatovat",
 	"nekonečná minuta",
+	"chuck norris",
 ]
 
 //shuffle
