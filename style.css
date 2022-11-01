@@ -1,0 +1,50 @@
+body
+{
+	background-image: url("bg-nebe.jpg");
+}
+
+header
+{
+	text-align: center;
+	color: yellow;
+	background-image: url("bg-nedk.jpg");
+	border-radius: 1em;
+	padding: 0.5em;
+	margin-bottom: 1em;
+}
+
+header>*>*
+{
+	padding: 2px;
+	background-image: url("bg-nebe.jpg");
+}
+
+main
+{
+	text-align: center;
+}
+
+.board
+{
+	display: inline-grid;
+	grid-template-columns: 25% 25% 25% 25%;
+	grid-template-rows: 25% 25% 25% 25%;
+}
+
+.square
+{
+	width: 6em;
+	height: 6em;
+	color: white;
+	background-image: url("bg-dark.jpg");
+	margin: 2px;
+	transition: opacity 0.2s;
+}
+
+.square>*
+{
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	translate: 0 -50%;
+}
