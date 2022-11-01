@@ -38,12 +38,13 @@ let dict = [
 //shuffle
 let random_gen = new Math.seedrandom(date_text);
 
-dict.map((cell) => {
-	let swap_index = Math.floor(random_gen.quick() * dict.length);
-	let temp = dict[swap_index];
-	dict[swap_index] = cell;
-	cell = temp;
-});
+for (i = 0; i < dict.length; ++i)
+{
+	var swap_index = Math.floor(random_gen.quick() * dict.length);
+	var temp = dict[swap_index];
+	dict[swap_index] = dict[i];
+	dict[i] = temp;
+}
 
 const win = () => {
 	alert("Bingo!");
