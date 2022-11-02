@@ -33,14 +33,14 @@ let dict = [
 	"scheatovat",
 	"nekonečná minuta",
 	"chuck norris",
+	"pozrem a vidim",
 	"nepriatel",
 ];
 
 //shuffle
 let random_gen = new Math.seedrandom(date_text);
 
-for (i = 0; i < dict.length; ++i)
-{
+for (i = 0; i < dict.length; ++i) {
 	var swap_index = Math.floor(random_gen.quick() * dict.length);
 	var temp = dict[swap_index];
 	dict[swap_index] = dict[i];
@@ -99,8 +99,12 @@ const check_win = () => {
 
 const onClickCell = (cell, index) => {
 	cell.onclick = function () {
-		checked[index] = true;
-		this.style.opacity = 0.4;
+		checked[index] = !checked[index];
+		if (checked[index]) {
+			this.style.opacity = 0.4;
+		} else {
+			this.style.opacity = 1;
+		}
 		check_win();
 	};
 };
