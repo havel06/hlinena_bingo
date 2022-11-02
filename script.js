@@ -34,6 +34,7 @@ let dict = [
 	"nekonečná minuta",
 	"chuck norris",
 	"pozrem a vidim",
+	"nepriatel",
 ];
 
 //shuffle
@@ -46,13 +47,18 @@ for (i = 0; i < dict.length; ++i) {
 	dict[i] = temp;
 }
 
+let won = false;
 const win = () => {
+	won = true;
 	alert("Bingo!");
 };
 
 let checked = Array(16).fill(false);
 
 const check_win = () => {
+	if (won) {
+		return;
+	}
 	//columns
 	for (x = 0; x < 4; ++x) {
 		column_full = true;
