@@ -13,8 +13,10 @@ let squares = document.getElementsByClassName("square");
 // random UUID seed stored in a cookie, that expires on midnight
 let device_unique_seed = "";
 // get the UUID from cookie
-const parts = `; ${document.cookie}`.split(`; ${"hlinena_bingo_device_unique_seed"}=`);
-device_unique_seed = parts.pop().split(';').shift();
+const parts = document.cookie.split("; ");
+device_unique_seed = parts
+	.find((row) => row.startsWith("hlinena_bingo_device_unique_seed="))
+	?.split("=")[1];
 // if no cookie is found (none created / expired), create one
 if(!device_unique_seed){
 	device_unique_seed = crypto.randomUUID();
