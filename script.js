@@ -32,7 +32,7 @@ let dict = [
 	"kolieska",
 	"počuješ ma tomáš?",
 	"hliněný",
-	"čas dôkaz",
+	"čas na dôkaz",
 	"tony",
 	"somarina",
 	"umelý krok",
@@ -50,6 +50,9 @@ let dict = [
 	"chuck norris",
 	"pozrem a vidim",
 	"nepriatel",
+	"vemte si ty papiery",
+	"adriana",
+	"lukáš",
 ];
 
 //shuffle
