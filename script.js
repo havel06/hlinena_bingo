@@ -9,43 +9,20 @@ let date_text =
 document.getElementById("date").innerText = date_text;
 let squares = document.getElementsByClassName("square");
 
+
 // random UUID seed stored in a cookie, that expires on midnight
 let device_unique_seed = "";
-let device_unique_random;
 // get the UUID from cookie
-// let ck = "hlinena_bingo_device_unique_seed=1054ca9c-86c8-40fc-a74d-b8805d1a3446; random_seed=0.43451968783512712; expires=Wed, 02 Nov 2022 22:59:59 GMT; path=/";
-const parts = document.cookie.split(`; `);
-
-device_unique_seed = parts
-	.find((row) => row.startsWith("hlinena_bingo_device_unique_seed="))
-	?.split("=")[1];
-device_unique_random = parseFloat(parts
-	.find((row) => row.startsWith("random_seed="))
-	?.split("=")[1]);
-
-// console.log(device_unique_seed, device_unique_random);
+const parts = `; ${document.cookie}`.split(`; ${"hlinena_bingo_device_unique_seed"}=`);
+device_unique_seed = parts.pop().split(';').shift();
 // if no cookie is found (none created / expired), create one
-if (!device_unique_seed) {
+if(!device_unique_seed){
 	device_unique_seed = crypto.randomUUID();
-	let midnight = new Date(
-		today.getFullYear(),
-		today.getMonth(),
-		today.getDate(),
-		23,
-		59,
-		59
-	);
-	let random_gen = new Math.seedrandom(device_unique_seed);
+	let midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
 	let expires = "; expires=" + midnight.toGMTString();
-	document.cookie =
-		"hlinena_bingo_device_unique_seed=" +
-		device_unique_seed +
-		"; " +
-		"random_seed=" +
-		random_gen.quick() +
-		expires +
-		"; path=/";
+	document.cookie = "hlinena_bingo_device_unique_seed=" + device_unique_seed + expires + "; path=/";
 }
+
 
 let dict = [
 	"drevorubač",
@@ -79,9 +56,10 @@ let dict = [
 ];
 
 //shuffle
+let random_gen = new Math.seedrandom(device_unique_seed);
 
 for (i = 0; i < dict.length; ++i) {
-	var swap_index = Math.floor(device_unique_random * dict.length);
+	var swap_index = Math.floor(random_gen.quick() * dict.length);
 	var temp = dict[swap_index];
 	dict[swap_index] = dict[i];
 	dict[i] = temp;
