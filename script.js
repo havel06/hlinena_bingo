@@ -9,6 +9,21 @@ let date_text =
 document.getElementById("date").innerText = date_text;
 let squares = document.getElementsByClassName("square");
 
+
+// random UUID seed stored in a cookie, that expires on midnight
+let device_unique_seed = "";
+// get the UUID from cookie
+const parts = `; ${document.cookie}`.split(`; ${"hlinena_bingo_device_unique_seed"}=`);
+device_unique_seed = parts.pop().split(';').shift();
+// if no cookie is found (none created / expired), create one
+if(!device_unique_seed){
+	device_unique_seed = crypto.randomUUID();
+	let midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
+	let expires = "; expires=" + midnight.toGMTString();
+	document.cookie = "hlinena_bingo_device_unique_seed=" + device_unique_seed + expires + "; path=/";
+}
+
+
 let dict = [
 	"drevorubač",
 	"hnusné číslo",
@@ -17,7 +32,7 @@ let dict = [
 	"kolieska",
 	"počuješ ma tomáš?",
 	"hliněný",
-	"čas dôkaz",
+	"čas na dôkaz",
 	"tony",
 	"somarina",
 	"umelý krok",
@@ -35,10 +50,13 @@ let dict = [
 	"chuck norris",
 	"pozrem a vidim",
 	"nepriatel",
+	"vemte si ty papiery",
+	"adriana",
+	"lukáš",
 ];
 
 //shuffle
-let random_gen = new Math.seedrandom(date_text);
+let random_gen = new Math.seedrandom(device_unique_seed);
 
 for (i = 0; i < dict.length; ++i) {
 	var swap_index = Math.floor(random_gen.quick() * dict.length);

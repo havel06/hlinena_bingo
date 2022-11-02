@@ -47,6 +47,11 @@ main
 	transition: opacity 0.2s;
 }
 
+.square:hover
+{
+	cursor: pointer;
+}
+
 .square>*
 {
 	display: inline-block;
