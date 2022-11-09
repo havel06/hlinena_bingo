@@ -56,6 +56,8 @@ let dict = [
 	"Adriana",
 	"Lukáš",
 	"finta",
+	"Jaromír", // kolega justjarda.cz na přednášce/zmínka o něm
+	"Jaroslav",
 ];
 
 //shuffle
