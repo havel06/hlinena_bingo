@@ -55,6 +55,7 @@ let dict = [
 	"vemte si ty papiery",
 	"adriana",
 	"lukáš",
+	"finta",
 ];
 
 //shuffle
