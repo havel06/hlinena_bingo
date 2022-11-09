@@ -8,17 +8,32 @@ let date_text =
 
 document.getElementById("date").innerText = date_text;
 let squares = document.getElementsByClassName("square");
+let numberOfWins = document.getElementById("winNum")
 
 
+const setLocalStorage = () => {
+	const checked = Array(16).fill(false);
+	localStorage.removeItem("checked")
+	localStorage.setItem("checked", JSON.stringify(checked))
+	const wins = JSON.parse(localStorage.getItem("win"))
+	const arrayExists = wins ? wins : []
+	const arrayOfWins = [ ...arrayExists, { "date": date_text, "win": false } ];
+	console.log(arrayOfWins)
+	localStorage.setItem("win", JSON.stringify(arrayOfWins))
+}
 // random UUID seed stored in a cookie, that expires on midnight
 let device_unique_seed = "";
+
 // get the UUID from cookie
 const parts = document.cookie.split("; ");
+
+//find unique seed in cookie
 device_unique_seed = parts
 	.find((row) => row.startsWith("hlinena_bingo_device_unique_seed="))
-	?.split("=")[1];
+	?.split("=")[ 1 ];
 // if no cookie is found (none created / expired), create one
-if(!device_unique_seed){
+if (!device_unique_seed) {
+	setLocalStorage()
 	device_unique_seed = crypto.randomUUID();
 	let midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
 	let expires = "; expires=" + midnight.toGMTString();
@@ -57,6 +72,9 @@ let dict = [
 	"lukáš",
 ];
 
+//parse array from localStorage
+const checked = JSON.parse(localStorage.getItem("checked"))
+
 //shuffle
 let random_gen = new Math.seedrandom(device_unique_seed);
 
@@ -67,18 +85,49 @@ for (i = 0; i < dict.length; ++i) {
 	dict[i] = temp;
 }
 
-let won = false;
+const findToday = () => {
+	let winArray = JSON.parse(localStorage.getItem("win"))
+	const todayObj = winArray.filter(day => {
+		if (day.date === date_text) {
+			return day;
+		}
+	})
+	return [winArray, todayObj[0]];
+}
+
+	
 const win = () => {
-	won = true;
+	let [winArray, todayObj] = findToday();
+	winArray = winArray.map(td => {
+		if (td.date === todayObj.date) {
+			td.win = true;
+		}
+		return td;
+	})
+	const arrayOfWins = [...winArray];
+	localStorage.setItem("win", JSON.stringify(arrayOfWins))
 	alert("Bingo!");
 };
 
-let checked = Array(16).fill(false);
-
-const check_win = () => {
+const countWins = () => {
+	let arrayOfWins = findToday()[ 0 ]
+	arrayOfWins = arrayOfWins.filter(day => {
+		if (day.win) {
+			return day;
+		}
+	})
+	let number = arrayOfWins.length;
+	numberOfWins.innerText = "Počet výher: " + [number];
+	return number;
+}
+countWins()
+const check_win = (checked) => {
+	countWins()
+	const won = findToday()[ 1 ].win
 	if (won) {
 		return;
 	}
+
 	//columns
 	for (x = 0; x < 4; ++x) {
 		column_full = true;
@@ -125,7 +174,8 @@ const onClickCell = (cell, index) => {
 		} else {
 			this.style.opacity = 1;
 		}
-		check_win();
+		localStorage.setItem("checked", JSON.stringify(checked))
+		check_win(checked);
 	};
 };
 
@@ -133,6 +183,11 @@ squares = [...squares];
 
 squares.forEach((cell) => {
 	let index = squares.indexOf(cell);
-	cell.children[0].innerText = dict[index];
+	cell.children[ 0 ].innerText = dict[ index ];
+	if (checked[index]) {
+		cell.style.opacity = 0.4;
+	} else {
+		cell.style.opacity = 1;
+	}
 	onClickCell(cell, index);
 });

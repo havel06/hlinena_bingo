@@ -59,3 +59,14 @@ main
 	margin-top: 50%;
 	translate: 0 -50%;
 }
+
+.numberOfWins {
+	box-sizing: border-box;
+	text-align: center;
+	color: yellow;
+	background-image: url("bg-nedk.jpg");
+	border-radius: 1em;
+	padding: 1em;
+	margin-bottom: 1em;
+	width: fit-content;
+}
