@@ -18,7 +18,6 @@ const setLocalStorage = () => {
 	const wins = JSON.parse(localStorage.getItem("win"))
 	const arrayExists = wins ? wins : []
 	const arrayOfWins = [ ...arrayExists, { "date": date_text, "win": false } ];
-	console.log(arrayOfWins)
 	localStorage.setItem("win", JSON.stringify(arrayOfWins))
 }
 // random UUID seed stored in a cookie, that expires on midnight
