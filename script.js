@@ -31,6 +31,7 @@ const parts = document.cookie.split("; ");
 device_unique_seed = parts
 	.find((row) => row.startsWith("hlinena_bingo_device_unique_seed="))
 	?.split("=")[ 1 ];
+
 // if no cookie is found (none created / expired), create one
 if (!device_unique_seed) {
 	setLocalStorage()
@@ -45,12 +46,12 @@ let dict = [
 	"drevorubač",
 	"hnusné číslo",
 	"zneužít",
-	"zuzka",
+	"Zuzka",
 	"kolieska",
-	"počuješ ma tomáš?",
-	"hliněný",
+	"počuješ ma Tomáš?",
+	"Hliněný",
 	"čas na dôkaz",
-	"tony",
+	"Tony",
 	"somarina",
 	"umelý krok",
 	"dcera",
@@ -61,15 +62,16 @@ let dict = [
 	"vyrušující ať jdou do parku",
 	"někdo spí",
 	"rozmazanej / přesvícenej visualizér",
-	"veronika",
+	"Veronika",
 	"scheatovat",
 	"nekonečná minuta",
-	"chuck norris",
+	"Chuck Norris",
 	"pozrem a vidim",
 	"nepriatel",
 	"vemte si ty papiery",
-	"adriana",
-	"lukáš",
+	"Adriana",
+	"Lukáš",
+	"finta",
 ];
 
 //parse array from localStorage
