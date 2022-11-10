@@ -15,10 +15,6 @@ const setLocalStorage = () => {
 	const checked = Array(16).fill(false);  
 	localStorage.removeItem("checked") //removing old checked array
 	localStorage.setItem("checked", JSON.stringify(checked)) //adding new checked array
-	const wins = JSON.parse(localStorage.getItem("win")) //getting array with wins
-	const arrayExists = wins ? wins : [] //checking if array with wins exists, if yes return it if not return empty array
-	const arrayOfWins = [ ...arrayExists, { "date": date_text, "win": false } ]; //add new object for today
-	localStorage.setItem("win", JSON.stringify(arrayOfWins)) //add it to local storage
 }
 // random UUID seed stored in a cookie, that expires on midnight
 let device_unique_seed = "";
@@ -86,49 +82,17 @@ for (i = 0; i < dict.length; ++i) {
 	dict[i] = temp;
 }
 
-//find today and return it with array from local storage
-const findToday = () => {
-	let winArray = JSON.parse(localStorage.getItem("win"))
-	const todayObj = winArray.filter(day => {
-		if (day.date === date_text) {
-			return day;
-		}
-	})
-	return [winArray, todayObj[0]];
-}
 
 //change today value for in and add it to local storage
+let won = false;
 const win = () => {
-	let [winArray, todayObj] = findToday();
-	winArray = winArray.map(td => {
-		if (td.date === todayObj.date) {
-			td.win = true;
-		}
-		return td;
-	})
-	const arrayOfWins = [...winArray];
-	localStorage.setItem("win", JSON.stringify(arrayOfWins))
+	won = true;
 	alert("Bingo!");
 };
 
-//count how much days have true in win from array in local storage
-const countWins = () => {
-	let arrayOfWins = findToday()[ 0 ]
-	arrayOfWins = arrayOfWins.filter(day => {
-		if (day.win) {
-			return day;
-		}
-	})
-	let number = arrayOfWins.length;
-	numberOfWins.innerText = "Počet výher: " + [number];
-	return number;
-}
-
-countWins()
 
 const check_win = (checked) => {
-	countWins()
-	const won = findToday()[ 1 ].win
+
 	if (won) {
 		return;
 	}
