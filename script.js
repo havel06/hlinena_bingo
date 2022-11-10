@@ -15,7 +15,7 @@
 			/* Settings */
 
 			this.user_id_cookie_name = "hlinena_bingo_device_unique_seed";
-			this.area_size = 5;
+			this.area_size = 4;
 
 
 			/* Internal properties */
