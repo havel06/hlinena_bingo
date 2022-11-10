@@ -1,36 +1,32 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
 	<title>Hliněná bingo</title>
 	<link rel="stylesheet" href="style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="seedrandom.js"></script>
+	<script src="script.js" defer></script>
 </head>
+
 <body>
 	<header>
 		<h1><span>Hliněná bingo</span></h1>
 		<h2><span id="date"></span></h2>
 	</header>
+
 	<main>
-		<div class="board" id="board">
-			<div class="square" id="square0"><div></div></div>
-			<div class="square" id="square1"><div></div></div>
-			<div class="square" id="square2"><div></div></div>
-			<div class="square" id="square3"><div></div></div>
-			<div class="square" id="square4"><div></div></div>
-			<div class="square" id="square5"><div></div></div>
-			<div class="square" id="square6"><div></div></div>
-			<div class="square" id="square7"><div></div></div>
-			<div class="square" id="square8"><div></div></div>
-			<div class="square" id="square9"><div></div></div>
-			<div class="square" id="square10"><div></div></div>
-			<div class="square" id="square11"><div></div></div>
-			<div class="square" id="square12"><div></div></div>
-			<div class="square" id="square13"><div></div></div>
-			<div class="square" id="square14"><div></div></div>
-			<div class="square" id="square15"><div></div></div>
-		</div>
+		<div class="board" id="play-area"></div>
 	</main>
+
+	<template id="row-template">
+		<div class="row"></div>
+	</template>
+	<template id="cell-template">
+		<div class="cell">
+			<div></div>
+		</div>
+	</template>
 </body>
-<script src="seedrandom.js"></script>
-<script src="script.js"></script>
+
 </html>
