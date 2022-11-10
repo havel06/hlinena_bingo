@@ -8,17 +8,28 @@ let date_text =
 
 document.getElementById("date").innerText = date_text;
 let squares = document.getElementsByClassName("square");
+let numberOfWins = document.getElementById("winNum")
 
 
+const setLocalStorage = () => {
+	const checked = Array(16).fill(false);  
+	localStorage.removeItem("checked") //removing old checked array
+	localStorage.setItem("checked", JSON.stringify(checked)) //adding new checked array
+}
 // random UUID seed stored in a cookie, that expires on midnight
 let device_unique_seed = "";
+
 // get the UUID from cookie
 const parts = document.cookie.split("; ");
+
+//find unique seed in cookie
 device_unique_seed = parts
 	.find((row) => row.startsWith("hlinena_bingo_device_unique_seed="))
-	?.split("=")[1];
+	?.split("=")[ 1 ];
+
 // if no cookie is found (none created / expired), create one
-if(!device_unique_seed){
+if (!device_unique_seed) {
+	setLocalStorage()
 	device_unique_seed = crypto.randomUUID();
 	let midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
 	let expires = "; expires=" + midnight.toGMTString();
@@ -58,6 +69,9 @@ let dict = [
 	"finta",
 ];
 
+//parse array from localStorage
+const checked = JSON.parse(localStorage.getItem("checked"))
+
 //shuffle
 let random_gen = new Math.seedrandom(device_unique_seed);
 
@@ -68,18 +82,21 @@ for (i = 0; i < dict.length; ++i) {
 	dict[i] = temp;
 }
 
+
+//change today value for in and add it to local storage
 let won = false;
 const win = () => {
 	won = true;
 	alert("Bingo!");
 };
 
-let checked = Array(16).fill(false);
 
-const check_win = () => {
+const check_win = (checked) => {
+
 	if (won) {
 		return;
 	}
+
 	//columns
 	for (x = 0; x < 4; ++x) {
 		column_full = true;
@@ -126,7 +143,8 @@ const onClickCell = (cell, index) => {
 		} else {
 			this.style.opacity = 1;
 		}
-		check_win();
+		localStorage.setItem("checked", JSON.stringify(checked))
+		check_win(checked);
 	};
 };
 
@@ -134,6 +152,11 @@ squares = [...squares];
 
 squares.forEach((cell) => {
 	let index = squares.indexOf(cell);
-	cell.children[0].innerText = dict[index];
+	cell.children[ 0 ].innerText = dict[ index ];
+	if (checked[index]) {
+		cell.style.opacity = 0.4;
+	} else {
+		cell.style.opacity = 1;
+	}
 	onClickCell(cell, index);
 });
