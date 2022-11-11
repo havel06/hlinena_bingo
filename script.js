@@ -30,6 +30,7 @@ let dict = [
 	"finta",
 ];
 
+
 const setToday = (today) => {
 	let date_text =
 	String(today.getDate()) +
@@ -37,6 +38,7 @@ const setToday = (today) => {
 	String(today.getMonth() + 1) +
 	". " +
 	String(today.getFullYear());
+
 
 	document.getElementById("date").innerText = date_text;
 }
@@ -93,13 +95,16 @@ const shuffleArray = (device_unique_seed) => {
 	}
 };
 
+
 const win = () => {
 	localStorage.setItem("win", JSON.stringify(true)); 
 	alert("Bingo!");
 };
 
+
 const check_win = (checked) => {
 	let won = JSON.parse(localStorage.getItem("win"))
+
 	if (won) {
 		return;
 	}
@@ -151,6 +156,7 @@ const onClickCell = (cell, index, checked) => {
 			this.style.opacity = 1;
 		}
 		localStorage.setItem("checked", JSON.stringify(checked)); //set new value for squares
+
 		check_win(checked);
 	};
 };
