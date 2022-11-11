@@ -59,3 +59,10 @@ main
 	margin-top: 50%;
 	translate: 0 -50%;
 }
+
+#my-canvas {
+	position: absolute;
+	top: 0;
+	left: 5;
+	z-index: -10;
+}
