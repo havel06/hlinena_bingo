@@ -95,7 +95,7 @@ const shuffleArray = (device_unique_seed) => {
 };
 
 const confetti = () => {
-	var confettiSettings = {"target":"my-canvas","max":"200","rotate":true,"respawn":false};
+	var confettiSettings = {"target":"my-canvas","max":"200","rotate":true,"respawn":true};
 	var confetti = new ConfettiGenerator(confettiSettings);
 	confetti.render();
 };
