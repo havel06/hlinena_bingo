@@ -1,6 +1,7 @@
 body
 {
 	background-image: url("bg-nebe.jpg");
+	overflow: hidden;
 }
 
 header
@@ -58,4 +59,11 @@ main
 	position: relative;
 	margin-top: 50%;
 	translate: 0 -50%;
+}
+
+#my-canvas {
+	position: absolute;
+	top: 0;
+	left: 5;
+	z-index: -10;
 }

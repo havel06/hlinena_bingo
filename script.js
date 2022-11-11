@@ -30,18 +30,16 @@ let dict = [
 	"finta",
 ];
 
-
 const setToday = (today) => {
 	let date_text =
-	String(today.getDate()) +
-	". " +
-	String(today.getMonth() + 1) +
-	". " +
-	String(today.getFullYear());
-
+		String(today.getDate()) +
+		". " +
+		String(today.getMonth() + 1) +
+		". " +
+		String(today.getFullYear());
 
 	document.getElementById("date").innerText = date_text;
-}
+};
 
 const setLocalStorage = () => {
 	const checked = Array(16).fill(false);
@@ -66,6 +64,7 @@ const setCookies = (today) => {
 	// if no cookie is found (none created / expired), create one
 	if (!device_unique_seed) {
 		setLocalStorage();
+
 		device_unique_seed = crypto.randomUUID();
 		let midnight = new Date(
 			today.getFullYear(),
@@ -95,16 +94,20 @@ const shuffleArray = (device_unique_seed) => {
 	}
 };
 
+const confetti = () => {
+	var confettiSettings = {"target":"my-canvas","max":"200","rotate":true,"respawn":false};
+	var confetti = new ConfettiGenerator(confettiSettings);
+	confetti.render();
+};
 
 const win = () => {
-	localStorage.setItem("win", JSON.stringify(true)); 
+	localStorage.setItem("win", JSON.stringify(true));
+	confetti();
 	alert("Bingo!");
 };
 
-
 const check_win = (checked) => {
-	let won = JSON.parse(localStorage.getItem("win"))
-
+	let won = JSON.parse(localStorage.getItem("win"));
 	if (won) {
 		return;
 	}
@@ -156,17 +159,16 @@ const onClickCell = (cell, index, checked) => {
 			this.style.opacity = 1;
 		}
 		localStorage.setItem("checked", JSON.stringify(checked)); //set new value for squares
-
 		check_win(checked);
 	};
 };
 
 const mainLoop = () => {
 	let today = new Date();
-	setToday(today)
+	setToday(today);
 	//parse array from localStorage
 	const checked = JSON.parse(localStorage.getItem("checked"));
-	
+
 	let device_unique_seed = setCookies(today);
 	shuffleArray(device_unique_seed);
 
