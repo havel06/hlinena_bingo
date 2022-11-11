@@ -106,6 +106,11 @@ const confetti = () => {
 	};
 	var confetti = new ConfettiGenerator(confettiSettings);
 	confetti.render();
+	
+	//stop after 10s
+	setTimeout(() => {
+		confetti.clear();
+	}, 10000);
 };
 
 const win = () => {
