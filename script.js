@@ -81,7 +81,10 @@ const setCookies = (today) => {
 			expires +
 			"; path=/";
 	}
-	return device_unique_seed;
+	//parse array from localStorage
+	const checked = JSON.parse(localStorage.getItem("checked"));
+	
+	return [device_unique_seed, checked];
 };
 
 const shuffleArray = (device_unique_seed) => {
@@ -95,7 +98,12 @@ const shuffleArray = (device_unique_seed) => {
 };
 
 const confetti = () => {
-	var confettiSettings = {"target":"my-canvas","max":"200","rotate":true,"respawn":true};
+	var confettiSettings = {
+		target: "my-canvas",
+		max: "200",
+		rotate: true,
+		respawn: true,
+	};
 	var confetti = new ConfettiGenerator(confettiSettings);
 	confetti.render();
 };
@@ -166,10 +174,8 @@ const onClickCell = (cell, index, checked) => {
 const mainLoop = () => {
 	let today = new Date();
 	setToday(today);
-	//parse array from localStorage
-	const checked = JSON.parse(localStorage.getItem("checked"));
 
-	let device_unique_seed = setCookies(today);
+	let [device_unique_seed, checked] = setCookies(today);
 	shuffleArray(device_unique_seed);
 
 	let squares = document.getElementsByClassName("square");
