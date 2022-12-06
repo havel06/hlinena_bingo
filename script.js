@@ -15,7 +15,7 @@ let dict = [
 	"násilí",
 	"hovadina",
 	"přestávku?",
-	"vyrušující ať jdou do parku",
+	"vyrušující ať jdou ven",
 	"někdo spí",
 	"rozmazanej / přesvícenej visualizér",
 	"Veronika",
