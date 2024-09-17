@@ -28,6 +28,7 @@ let dict = [
 	"Adriana",
 	"Lukáš",
 	"finta",
+	"instagram"
 ];
 
 const setToday = (today) => {
